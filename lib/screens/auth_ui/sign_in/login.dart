@@ -1,0 +1,118 @@
+import 'package:demo_sogin_signup_firebase/constants/assets_image.dart';
+import 'package:demo_sogin_signup_firebase/constants/asstes_colors.dart';
+import 'package:demo_sogin_signup_firebase/screens/auth_ui/sign_up/signup.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import '../../../reusable_widget/reusable_widget.dart';
+import '../../home_page.dart';
+
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+          App_colors.primaryColor,
+          App_colors.textColor,
+          App_colors.textColor,
+        ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                const Text("Wellcome",
+                    style:
+                        TextStyle(fontSize: 50, fontWeight: FontWeight.w500)),
+                const SizedBox(
+                  height: 12,
+                ),
+                const Text("We're happy when you're satisfied",
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w300)),
+                SizedBox(
+                  height: 30,
+                ),
+                Center(
+                    child: Image.asset(
+                  AssetsImages.instance.home_VNT,
+                )),
+                reusable_Textfile("Enter Username", Icons.person_outline, false,
+                    _emailController),
+                SizedBox(
+                  height: 10,
+                ),
+                reusable_Textfile("Enter Password", Icons.person_outline, false,
+                    _passwordController),
+                SizedBox(
+                  height: 10,
+                ),
+                Button_Login(context, "LOGIN", () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Home_Page()));
+                }),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "------------------------------",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      "or",
+                      style: TextStyle(fontSize: 23, color: Colors.white),
+                    ),
+                    Text("------------------------------",
+                        style: TextStyle(color: Colors.white)),
+                  ],
+                ),
+                Button_Login(context, "SINGUP", () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Signup()));
+                }),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CupertinoButton(
+                      onPressed: () {},
+                      child: Icon(
+                        Icons.facebook,
+                        size: 30,
+                        color: Colors.blueAccent,
+                      ),
+                    ),
+                    Text("or"),
+                    CupertinoButton(
+                        child: Image.asset(
+                          AssetsImages.instance.google,
+                          scale: 23.0,
+                        ),
+                        onPressed: () {})
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
