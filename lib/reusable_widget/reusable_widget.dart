@@ -23,6 +23,50 @@ TextField reusable_Textfile(String text, IconData icon, bool ispasswordtype,
         icon,
         color: Colors.white70,
       ),
+      suffixIcon: textEditingController.text.isEmpty
+          ? Container(
+              width: 0,
+            )
+          : IconButton(
+              onPressed: () => textEditingController.clear(),
+              icon: Icon(
+                Icons.close,
+                color: Colors.black45,
+              )),
+      labelText: text,
+      labelStyle: TextStyle(color: Colors.white),
+      filled: true,
+      floatingLabelBehavior: FloatingLabelBehavior.never,
+      fillColor: Colors.white.withOpacity(0.3),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30.0),
+          borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
+    ),
+    keyboardType: ispasswordtype
+        ? TextInputType.visiblePassword
+        : TextInputType.emailAddress,
+  );
+}
+
+TextField reusable_TextfilePass(String text, IconData icon, bool ispasswordtype,
+    TextEditingController textEditingController) {
+  return TextField(
+    controller: textEditingController,
+    obscureText: ispasswordtype,
+    enableSuggestions: !ispasswordtype,
+    cursorColor: Colors.white,
+    style: TextStyle(color: Colors.white),
+    decoration: InputDecoration(
+      prefixIcon: Icon(
+        icon,
+        color: Colors.white70,
+      ),
+      suffixIcon: IconButton(
+        icon: ispasswordtype
+            ? Icon(Icons.visibility_off)
+            : Icon(Icons.visibility),
+        onPressed: () => {ispasswordtype = !ispasswordtype},
+      ),
       labelText: text,
       labelStyle: TextStyle(color: Colors.white),
       filled: true,

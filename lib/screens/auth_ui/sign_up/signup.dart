@@ -1,4 +1,5 @@
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/sign_in/login.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/assets_image.dart';
@@ -13,6 +14,8 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  bool isShowPassword = true;
+  bool isShowConfirmPassword = true;
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -65,13 +68,76 @@ class _SignupState extends State<Signup> {
                 SizedBox(
                   height: 10,
                 ),
-                reusable_Textfile("Enter password", Icons.password, false,
-                    _passwordController),
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: isShowPassword,
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.password_sharp,
+                      color: Colors.white,
+                    ),
+                    suffixIcon: CupertinoButton(
+                      onPressed: () {
+                        setState(() {
+                          isShowPassword = !isShowPassword;
+                        });
+                      },
+                      child: !isShowPassword
+                          ? const Icon(
+                              Icons.visibility,
+                              color: Colors.black45,
+                            )
+                          : const Icon(
+                              Icons.visibility_off,
+                              color: Colors.black45,
+                            ),
+                    ),
+                    labelStyle: TextStyle(color: Colors.white),
+                    filled: true,
+                    labelText: "EnterPassword",
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    fillColor: Colors.white.withOpacity(0.3),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: const BorderSide(
+                            width: 0, style: BorderStyle.none)),
+                  ),
+                ),
                 SizedBox(
                   height: 10,
                 ),
-                reusable_Textfile("Enter confirm password", Icons.password,
-                    false, _confirmpasswordController),
+                TextFormField(
+                  controller: _confirmpasswordController,
+                  obscureText: isShowConfirmPassword,
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.password_sharp,
+                      color: Colors.white,
+                    ),
+                    suffixIcon: CupertinoButton(
+                      onPressed: () {
+                        setState(() {
+                          isShowConfirmPassword = !isShowConfirmPassword;
+                        });
+                      },
+                      child: !isShowConfirmPassword
+                          ? const Icon(Icons.visibility, color: Colors.black45)
+                          : const Icon(Icons.visibility_off,
+                              color: Colors.black45),
+                    ),
+                    labelStyle: TextStyle(color: Colors.white),
+                    filled: true,
+                    labelText: "Confirm Password",
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    fillColor: Colors.white.withOpacity(0.3),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: const BorderSide(
+                            width: 0, style: BorderStyle.none)),
+                  ),
+                ),
                 SizedBox(
                   height: 10,
                 ),

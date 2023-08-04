@@ -15,6 +15,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool isShowPassword = true;
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   @override
@@ -46,7 +47,7 @@ class _LoginState extends State<Login> {
                 const Text("We're happy when you're satisfied",
                     style:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.w300)),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Center(
@@ -55,12 +56,41 @@ class _LoginState extends State<Login> {
                 )),
                 reusable_Textfile("Enter Username", Icons.person_outline, false,
                     _emailController),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                reusable_Textfile("Enter Password", Icons.person_outline, false,
-                    _passwordController),
-                SizedBox(
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: isShowPassword,
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.password_sharp,
+                      color: Colors.white,
+                    ),
+                    suffixIcon: CupertinoButton(
+                      onPressed: () {
+                        setState(() {
+                          isShowPassword = !isShowPassword;
+                        });
+                      },
+                      child: !isShowPassword
+                          ? const Icon(Icons.visibility, color: Colors.black45)
+                          : const Icon(Icons.visibility_off,
+                              color: Colors.black45),
+                    ),
+                    labelStyle: TextStyle(color: Colors.white),
+                    filled: true,
+                    labelText: "EnterPassword",
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    fillColor: Colors.white.withOpacity(0.3),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: const BorderSide(
+                            width: 0, style: BorderStyle.none)),
+                  ),
+                ),
+                const SizedBox(
                   height: 10,
                 ),
                 Button_Login(context, "LOGIN", () {

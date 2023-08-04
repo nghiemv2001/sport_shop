@@ -49,12 +49,12 @@ class _SignUp_ScreenState extends State<SignUp_Screen> {
                 const SizedBox(
                   height: 20,
                 ),
-                reusable_Textfile("Enter Email", Icons.person_outline, false,
+                reusable_Textfile("Enter Email", Icons.person_outline, true,
                     _emailController),
                 const SizedBox(
                   height: 20,
                 ),
-                reusable_Textfile("Enter Password", Icons.lock_outline, false,
+                reusable_Textfile("Enter Password", Icons.lock_outline, true,
                     _passwordController),
                 const SizedBox(
                   height: 20,

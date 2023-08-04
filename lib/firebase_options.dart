@@ -44,40 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDXy1xIhH4WhAoxbeOiRWCWIrJnB0qT9EI',
-    appId: '1:243032132710:web:ef70fe0c6a2bc8f1ab31a7',
-    messagingSenderId: '243032132710',
-    projectId: 'login-signup-firebase-9a8a4',
-    authDomain: 'login-signup-firebase-9a8a4.firebaseapp.com',
-    storageBucket: 'login-signup-firebase-9a8a4.appspot.com',
-    measurementId: 'G-J433FKN56K',
+    apiKey: 'AIzaSyBgbW7siwHOJjKaKHnYGZYTz9yrgUuSxrc',
+    appId: '1:373880485830:web:b29bf04d3ca6f9524b24c7',
+    messagingSenderId: '373880485830',
+    projectId: 'sport-shop-bfe0a',
+    authDomain: 'sport-shop-bfe0a.firebaseapp.com',
+    storageBucket: 'sport-shop-bfe0a.appspot.com',
+    measurementId: 'G-TQK4F25T3B',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAXVP33tBRidU5xT1XCmY5JaSwIzQEib30',
-    appId: '1:243032132710:android:794b66e7cd0e7c89ab31a7',
-    messagingSenderId: '243032132710',
-    projectId: 'login-signup-firebase-9a8a4',
-    storageBucket: 'login-signup-firebase-9a8a4.appspot.com',
+    apiKey: 'AIzaSyDdv886wsRoTxtaV7_UjozvhwZgoz31iFI',
+    appId: '1:373880485830:android:ba119451ef2517804b24c7',
+    messagingSenderId: '373880485830',
+    projectId: 'sport-shop-bfe0a',
+    storageBucket: 'sport-shop-bfe0a.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCIadGJX2Vvy1Atsb4s2xaP4Rnmq4xbU9s',
-    appId: '1:243032132710:ios:5c75589b1adeea0eab31a7',
-    messagingSenderId: '243032132710',
-    projectId: 'login-signup-firebase-9a8a4',
-    storageBucket: 'login-signup-firebase-9a8a4.appspot.com',
-    iosClientId: '243032132710-efvkj4nn605cbchqhjo9lfv1sg4nfcsh.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDXuBYNTU-fDUZYzsJJY5LFJswrsXf2zOQ',
+    appId: '1:373880485830:ios:65ebe0d4a08b05044b24c7',
+    messagingSenderId: '373880485830',
+    projectId: 'sport-shop-bfe0a',
+    storageBucket: 'sport-shop-bfe0a.appspot.com',
+    iosClientId: '373880485830-501fo4n5vurhff3ose93s105lct1phdv.apps.googleusercontent.com',
     iosBundleId: 'com.example.demoSoginSignupFirebase',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCIadGJX2Vvy1Atsb4s2xaP4Rnmq4xbU9s',
-    appId: '1:243032132710:ios:2a4eccecaacfe19aab31a7',
-    messagingSenderId: '243032132710',
-    projectId: 'login-signup-firebase-9a8a4',
-    storageBucket: 'login-signup-firebase-9a8a4.appspot.com',
-    iosClientId: '243032132710-hu03a9bo7104tgc4ct9f4fsnat3u7hfu.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDXuBYNTU-fDUZYzsJJY5LFJswrsXf2zOQ',
+    appId: '1:373880485830:ios:dc973bb8657894044b24c7',
+    messagingSenderId: '373880485830',
+    projectId: 'sport-shop-bfe0a',
+    storageBucket: 'sport-shop-bfe0a.appspot.com',
+    iosClientId: '373880485830-3nmus5t8dhnokvmgt1le8m9dronkkr57.apps.googleusercontent.com',
     iosBundleId: 'com.example.demoSoginSignupFirebase.RunnerTests',
   );
 }

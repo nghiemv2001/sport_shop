@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "243032132710",
-    "project_id": "login-signup-firebase-9a8a4",
-    "storage_bucket": "login-signup-firebase-9a8a4.appspot.com"
+    "project_number": "373880485830",
+    "project_id": "sport-shop-bfe0a",
+    "storage_bucket": "sport-shop-bfe0a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:243032132710:android:794b66e7cd0e7c89ab31a7",
+        "mobilesdk_app_id": "1:373880485830:android:ba119451ef2517804b24c7",
         "android_client_info": {
           "package_name": "com.example.demo_sogin_signup_firebase"
         }
       },
       "oauth_client": [
         {
-          "client_id": "243032132710-iinj6l1bg9onb0k23ujn545u9q793v1c.apps.googleusercontent.com",
+          "client_id": "373880485830-8t3uecdm6rev596f5cgj0fv8lsaf84sn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAXVP33tBRidU5xT1XCmY5JaSwIzQEib30"
+          "current_key": "AIzaSyDdv886wsRoTxtaV7_UjozvhwZgoz31iFI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "243032132710-iinj6l1bg9onb0k23ujn545u9q793v1c.apps.googleusercontent.com",
+              "client_id": "373880485830-8t3uecdm6rev596f5cgj0fv8lsaf84sn.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "243032132710-q9b0vu68bb4marktvf7g9qhtiad6bhfd.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.loginSignupFirebase"
-              }
             }
           ]
         }

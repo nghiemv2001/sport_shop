@@ -36,7 +36,7 @@ class _Login_pageState extends State<Login_page> {
                 const SizedBox(
                   height: 30,
                 ),
-                reusable_Textfile("Enter Username", Icons.person_outline, false,
+                reusable_Textfile("Enter Username", Icons.person_outline, true,
                     _emailController),
                 const SizedBox(
                   height: 30,
