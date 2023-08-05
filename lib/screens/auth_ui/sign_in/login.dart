@@ -1,11 +1,14 @@
 import 'package:demo_sogin_signup_firebase/constants/assets_image.dart';
 import 'package:demo_sogin_signup_firebase/constants/asstes_colors.dart';
+import 'package:demo_sogin_signup_firebase/constants/constans.dart';
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/sign_up/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../constants/routes.dart';
+import '../../../firebase/firebase_helper/firebase_auth_helper.dart';
 import '../../../reusable_widget/reusable_widget.dart';
-import '../../home_page.dart';
+import '../../home_ui/home.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -93,11 +96,29 @@ class _LoginState extends State<Login> {
                 const SizedBox(
                   height: 10,
                 ),
-                Button_Login(context, "LOGIN", () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Home_Page()));
+                Button_Login(context, "LOGIN", () async {
+                  bool isVaildated = loginVaildation(
+                      _emailController.text, _passwordController.text);
+                  if (isVaildated) {
+                    bool isLogined = await FirebaseAuthHelper.instance.login(
+                        _emailController.text,
+                        _passwordController.text,
+                        context);
+                    if (isLogined) {
+                      Routes.instance.pushAndRemoveUntil(
+                          widget: const Home(), context: context);
+                    }
+                  }
+                  // FirebaseAuth.instance
+                  //     .signInWithEmailAndPassword(
+                  //         email: _emailController.text,
+                  //         password: _passwordController.text)
+                  //     .then((value) {
+                  //   Navigator.push(context,
+                  //       MaterialPageRoute(builder: (context) => const Home()));
+                  // }).onError((error, stackTrace) {
+                  //   showMessage(error.toString());
+                  // });
                 }),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

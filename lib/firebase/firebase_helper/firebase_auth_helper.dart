@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class FirebaseAuthHelper {
+  static FirebaseAuthHelper instance = FirebaseAuthHelper();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Stream<User?> get getAuthChange => _auth.authStateChanges();
 
@@ -14,6 +15,7 @@ class FirebaseAuthHelper {
       Navigator.of(context).pop();
       return true;
     } on FirebaseAuthException catch (error) {
+      Navigator.of(context).pop();
       showMessage(error.code.toString());
       return false;
     }

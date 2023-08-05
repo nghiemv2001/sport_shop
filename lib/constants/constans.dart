@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 void showMessage(String message) {
   Fluttertoast.showToast(
-      msg: "This is Center Short Toast",
+      msg: message,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 1,
@@ -75,6 +75,8 @@ String getMessageFromErrorCode(String errorcode) {
       return "Email address is invalid";
     case "invalid-email":
       return "Email address is invalid.";
+    case "CONFIGURATION_NOT_FOUND":
+      return "user not found";
     default:
       return "Login failed. PLease try again.";
   }

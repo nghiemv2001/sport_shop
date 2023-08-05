@@ -1,4 +1,5 @@
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/sign_in/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -141,7 +142,19 @@ class _SignupState extends State<Signup> {
                 SizedBox(
                   height: 10,
                 ),
-                Button_Login(context, "SIGNUP", () {}),
+                Button_Login(context, "SIGNUP", () {
+                  FirebaseAuth.instance
+                      .createUserWithEmailAndPassword(
+                          email: _emailController.text,
+                          password: _passwordController.text)
+                      .then((value) {
+                    print("Create Account");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Login()));
+                  }).onError((error, stackTrace) {
+                    print("${error.toString()}");
+                  });
+                }),
                 SizedBox(
                   height: 10,
                 ),
