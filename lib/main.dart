@@ -1,4 +1,4 @@
-import 'package:demo_sogin_signup_firebase/screens/auth_ui/sign_in/login.dart';
+import 'package:demo_sogin_signup_firebase/screens/home_ui/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Demo with firebase",
       theme: ThemeData(primarySwatch: Colors.indigo),
-      home: const Login(),
+      home: const Home(),
     );
   }
 }
