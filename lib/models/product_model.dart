@@ -14,7 +14,7 @@ class Product {
   String image;
   String description;
   String status;
-  int price;
+  double price;
   bool isFavourite;
 
   Product({
@@ -34,7 +34,7 @@ class Product {
         description: json['description'],
         id: json["id"],
         name: json["name"],
-        price: json["price"],
+        price: double.parse(json["price"].toString()),
       );
 
   Map<String, dynamic> toJson() => {
