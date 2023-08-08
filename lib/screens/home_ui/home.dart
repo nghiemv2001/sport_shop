@@ -1,8 +1,13 @@
 import 'package:demo_sogin_signup_firebase/firebase/firebase_firestore/firebase_firebasestore.dart';
-import 'package:demo_sogin_signup_firebase/models/category_model.dart';
-import 'package:demo_sogin_signup_firebase/models/product_model.dart';
+import 'package:demo_sogin_signup_firebase/screens/auth_ui/category_ui/category_viewproducts.dart';
+import 'package:demo_sogin_signup_firebase/screens/product_ui/product_detail.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../constants/routes.dart';
+import '../../models/category_model.dart';
+import '../../models/product_model.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -29,9 +34,10 @@ class _HomeState extends State<Home> {
       isLoading = true;
     });
     categorieslist = await FirebaseFirestoreHelper.instance.getCategories();
+
     bestproductlist =
         await FirebaseFirestoreHelper.instance.getBestProductList();
-
+    bestproductlist.shuffle();
     setState(() {
       isLoading = false;
     });
@@ -103,22 +109,29 @@ class _HomeState extends State<Home> {
                                 .map(
                                   (e) => Padding(
                                     padding: const EdgeInsets.all(5.0),
-                                    child: Card(
-                                        color: Colors.white,
-                                        elevation: 13.0,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30.0),
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(30.0),
-                                          child: SizedBox(
-                                            height: 90,
-                                            width: 90,
-                                            child: Image.network(e.image),
+                                    child: CupertinoButton(
+                                      onPressed: () {
+                                        Routes.instance.push(
+                                            widget: CategoryView(category: e),
+                                            context: context);
+                                      },
+                                      child: Card(
+                                          color: Colors.white,
+                                          elevation: 13.0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30.0),
                                           ),
-                                        )),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(30.0),
+                                            child: SizedBox(
+                                              height: 90,
+                                              width: 90,
+                                              child: Image.network(e.image),
+                                            ),
+                                          )),
+                                    ),
                                   ),
                                 )
                                 .toList(),
@@ -148,22 +161,22 @@ class _HomeState extends State<Home> {
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
-                                      childAspectRatio: 0.9,
+                                      childAspectRatio: 0.7,
                                       crossAxisSpacing: 25,
                                       mainAxisSpacing: 25),
                               itemBuilder: (ctx, index) {
                                 Product singleProduct = bestproductlist[index];
                                 return Container(
                                   decoration: BoxDecoration(
-                                      color: Colors.redAccent.withOpacity(0.3),
+                                      color: Colors.yellow.withOpacity(0.3),
                                       borderRadius: BorderRadius.circular(20)),
                                   child: Column(
                                     children: [
                                       Image.network(
                                         singleProduct.image,
                                         scale: 9,
-                                        height: 60,
-                                        width: 60,
+                                        height: 110,
+                                        width: 150,
                                       ),
                                       const SizedBox(
                                         height: 12,
@@ -175,7 +188,7 @@ class _HomeState extends State<Home> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        "Price: \$${singleProduct.price}",
+                                        "Price: ${singleProduct.price} \$",
                                         style: const TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold),
@@ -187,7 +200,13 @@ class _HomeState extends State<Home> {
                                         height: 40,
                                         width: 140,
                                         child: OutlinedButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Routes.instance.push(
+                                                  widget: ProductDetail(
+                                                      singleProduct:
+                                                          singleProduct),
+                                                  context: context);
+                                            },
                                             style: OutlinedButton.styleFrom(
                                                 foregroundColor: Colors.black45,
                                                 side: const BorderSide(

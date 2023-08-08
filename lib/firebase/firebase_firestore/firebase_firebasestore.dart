@@ -19,18 +19,35 @@ class FirebaseFirestoreHelper {
     }
   }
 
+  Future<List<Product>> getCategoriesViewProduct(String id) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await _firebaseFirestore
+              .collection("categories")
+              .doc(id)
+              .collection("products")
+              .get();
+      List<Product> categoriesViewProductList =
+          querySnapshot.docs.map((e) => Product.fromJson(e.data())).toList();
+      return categoriesViewProductList;
+    } catch (e) {
+      showMessage(e.toString());
+      return [];
+    }
+  }
+
   Future<List<Product>> getBestProductList() async {
     try {
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
-          await _firebaseFirestore.collection("products").get();
+          await _firebaseFirestore.collectionGroup("products").get();
       for (var element in querySnapshot.docs) {
         print(element.data());
-        print("object2");
       }
-      // List<Product> bestProductList =
-      //     querySnapshot.docs.map((e) => Product.fromJson(e.data())).toList();
-      return [];
+      List<Product> bestProductList =
+          querySnapshot.docs.map((e) => Product.fromJson(e.data())).toList();
+      return bestProductList;
     } catch (e) {
+      print(e.toString());
       showMessage(e.toString());
       return [];
     }

@@ -19,7 +19,14 @@ ThemeData themData = ThemeData(
             textStyle: const TextStyle(
               fontSize: 18,
             ),
-            disabledBackgroundColor: Colors.grey)));
+            disabledBackgroundColor: Colors.grey)),
+    primarySwatch: Colors.red,
+    canvasColor: Colors.red,
+    appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        toolbarTextStyle: TextStyle(color: Colors.black),
+        iconTheme: IconThemeData(color: Colors.black)));
 OutlineInputBorder outlineInputBorder = const OutlineInputBorder(
     borderSide: BorderSide(
   color: Colors.grey,

@@ -9,41 +9,41 @@ Product productFromJson(String str) => Product.fromJson(json.decode(str));
 String productToJson(Product data) => json.encode(data.toJson());
 
 class Product {
-  String id;
-  String name;
-  String image;
   String description;
-  String status;
-  double price;
+  String id;
+  String image;
   bool isFavourite;
+  String name;
+  String price;
+  String status;
 
   Product({
-    required this.status,
     required this.description,
-    required this.image,
     required this.id,
+    required this.image,
+    required this.isFavourite,
     required this.name,
     required this.price,
-    required this.isFavourite,
+    required this.status,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
-        isFavourite: json["isFavourite"],
-        status: json["status"],
-        image: json["image"],
-        description: json['description'],
+        description: json["description"],
         id: json["id"],
+        image: json["image"],
+        isFavourite: json["isFavourite"],
         name: json["name"],
-        price: double.parse(json["price"].toString()),
+        price: json["price"],
+        status: json["status"],
       );
 
   Map<String, dynamic> toJson() => {
+        "description": description,
         "id": id,
+        "image": image,
+        "isFavourite": isFavourite,
         "name": name,
         "price": price,
-        "image": image,
-        "description": description,
         "status": status,
-        "isFavourite": isFavourite,
       };
 }

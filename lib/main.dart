@@ -1,3 +1,4 @@
+import 'package:demo_sogin_signup_firebase/constants/theme.dart';
 import 'package:demo_sogin_signup_firebase/screens/home_ui/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Demo with firebase",
-      theme: ThemeData(primarySwatch: Colors.indigo),
+      theme: themData,
       home: const Home(),
     );
   }
