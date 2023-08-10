@@ -1,4 +1,8 @@
+import 'package:demo_sogin_signup_firebase/screens/auth_ui/Cart_UI/singlecart_item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../provider/provider_model.dart';
 
 class Cart_View extends StatefulWidget {
   const Cart_View({Key? key}) : super(key: key);
@@ -10,6 +14,7 @@ class Cart_View extends StatefulWidget {
 class _Cart_ViewState extends State<Cart_View> {
   @override
   Widget build(BuildContext context) {
+    AppProvider approvider = Provider.of<AppProvider>(context);
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -17,34 +22,17 @@ class _Cart_ViewState extends State<Cart_View> {
             style: TextStyle(color: Colors.black),
           ),
         ),
-        body: ListView.builder(
-            itemCount: 4,
-            padding: const EdgeInsets.all(12),
-            itemBuilder: (ctx, index) {
-              return Container(
-                  margin: EdgeInsets.only(bottom: 12),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.black, width: 3)),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 140,
-                          color: Colors.red.withOpacity(0.5),
-                          child: Image.network(
-                              "https://www.punchequipment.com/wp-content/uploads/2022/01/PBG7LACEBL10V322.png"),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Container(
-                          height: 140,
-                          color: Colors.white.withOpacity(0.5),
-                        ),
-                      )
-                    ],
-                  ));
-            }));
+        body: approvider.getCartProductList.isEmpty
+            ? const Center(
+                child: Text("Empty"),
+              )
+            : ListView.builder(
+                itemCount: approvider.getCartProductList.length,
+                padding: const EdgeInsets.all(12),
+                itemBuilder: (ctx, index) {
+                  return SingGle_cart_item(
+                    singProduct: approvider.getCartProductList[index],
+                  );
+                }));
   }
 }

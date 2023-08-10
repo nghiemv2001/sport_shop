@@ -1,8 +1,11 @@
+import 'package:demo_sogin_signup_firebase/constants/constans.dart';
 import 'package:demo_sogin_signup_firebase/constants/routes.dart';
 import 'package:demo_sogin_signup_firebase/models/product_model.dart';
+import 'package:demo_sogin_signup_firebase/provider/provider_model.dart';
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/Cart_UI/CartView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetail extends StatefulWidget {
   const ProductDetail({Key? key, required this.singleProduct})
@@ -104,7 +107,15 @@ class _ProductDetailState extends State<ProductDetail> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              OutlinedButton(onPressed: () {}, child: Text("ADD TO CART")),
+              OutlinedButton(
+                  onPressed: () {
+                    AppProvider approvider =
+                        Provider.of<AppProvider>(context, listen: false);
+                    Product product = widget.singleProduct.copyWith(qty: qty);
+                    approvider.addCartProduct(product);
+                    showMessage("ADD CART");
+                  },
+                  child: Text("ADD TO CART")),
               const SizedBox(
                 width: 24,
               ),

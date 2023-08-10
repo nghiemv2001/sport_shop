@@ -72,7 +72,7 @@ class _CategoryViewState extends State<CategoryView> {
                     ),
                     bestproductlist.isEmpty
                         ? const Center(
-                            child: Text("Top sale Empty"),
+                            child: Text("Categories dont have any product."),
                           )
                         : Padding(
                             padding: const EdgeInsets.only(
