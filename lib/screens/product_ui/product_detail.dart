@@ -3,6 +3,7 @@ import 'package:demo_sogin_signup_firebase/constants/routes.dart';
 import 'package:demo_sogin_signup_firebase/models/product_model.dart';
 import 'package:demo_sogin_signup_firebase/provider/provider_model.dart';
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/Cart_UI/CartView.dart';
+import 'package:demo_sogin_signup_firebase/screens/auth_ui/favorite_view/favorite_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class _ProductDetailState extends State<ProductDetail> {
   int qty = 1;
   @override
   Widget build(BuildContext context) {
+    AppProvider approvider = Provider.of<AppProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -54,8 +56,14 @@ class _ProductDetailState extends State<ProductDetail> {
                       widget.singleProduct.isFavourite =
                           !widget.singleProduct.isFavourite;
                     });
+                    if (widget.singleProduct.isFavourite) {
+                      approvider.addfavoriteProduct(widget.singleProduct);
+                    } else {
+                      approvider.removefavoriteProduct(widget.singleProduct);
+                    }
                   },
-                  icon: Icon(widget.singleProduct.isFavourite
+                  icon: Icon(approvider.getfavoriteProductList
+                          .contains(widget.singleProduct)
                       ? Icons.favorite
                       : Icons.favorite_border)),
             ],
@@ -109,8 +117,6 @@ class _ProductDetailState extends State<ProductDetail> {
             children: [
               OutlinedButton(
                   onPressed: () {
-                    AppProvider approvider =
-                        Provider.of<AppProvider>(context, listen: false);
                     Product product = widget.singleProduct.copyWith(qty: qty);
                     approvider.addCartProduct(product);
                     showMessage("ADD CART");
@@ -123,7 +129,10 @@ class _ProductDetailState extends State<ProductDetail> {
                 height: 38,
                 width: 140,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Routes.instance
+                        .push(widget: const favorite_view(), context: context);
+                  },
                   child: Text("BUY"),
                 ),
               ),

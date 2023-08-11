@@ -26,6 +26,7 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
 
   @override
   Widget build(BuildContext context) {
+    AppProvider approvider = Provider.of<AppProvider>(context, listen: false);
     return Container(
         margin: EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
@@ -46,7 +47,7 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                 height: 140,
                 color: Colors.white.withOpacity(0.5),
                 child: Padding(
-                  padding: EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
@@ -57,15 +58,20 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                           Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  widget.singProduct.name,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
+                                SizedBox(
+                                  width: 100,
+                                  child: Text(
+                                    widget.singProduct.name,
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
                                 Row(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 20,
                                     ),
                                     CupertinoButton(
@@ -73,7 +79,7 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                         child: Container(
                                           height: 40,
                                           width: 40,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                               shape: BoxShape.circle),
                                           child: Icon(Icons.remove),
                                         ),
@@ -90,7 +96,7 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                         child: Container(
                                           height: 40,
                                           width: 40,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                               shape: BoxShape.circle),
                                           child: Icon(Icons.add),
                                         ),
@@ -104,32 +110,39 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                 Row(
                                   children: [
                                     CupertinoButton(
-                                        child: const Text(
-                                          "Add to WishList",
-                                          style: TextStyle(
+                                        padding: EdgeInsets.zero,
+                                        onPressed: () {
+                                          if (!approvider.getfavoriteProductList
+                                              .contains(widget.singProduct)) {
+                                            approvider.addfavoriteProduct(
+                                                widget.singProduct);
+                                            showMessage("Add to wishlist");
+                                          } else {
+                                            approvider.removefavoriteProduct(
+                                                widget.singProduct);
+                                            showMessage("Removed to wishlist");
+                                          }
+                                        },
+                                        child: Text(
+                                          approvider.getfavoriteProductList
+                                                  .contains(widget.singProduct)
+                                              ? "Remove to wishlist"
+                                              : "Add to WishList",
+                                          style: const TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold),
-                                        ),
-                                        padding: EdgeInsets.zero,
-                                        onPressed: () {}),
+                                        )),
                                   ],
                                 )
                               ]),
                           Text(
                             "Price: ${widget.singProduct.price} \$",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
                       CupertinoButton(
-                          child: CircleAvatar(
-                            maxRadius: 13,
-                            child: Icon(
-                              Icons.delete,
-                              size: 17,
-                            ),
-                          ),
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             AppProvider approvider = Provider.of<AppProvider>(
@@ -137,7 +150,14 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                 listen: false);
                             approvider.removeCartProduct(widget.singProduct);
                             showMessage("Remove from cart");
-                          })
+                          },
+                          child: const CircleAvatar(
+                            maxRadius: 13,
+                            child: Icon(
+                              Icons.delete,
+                              size: 17,
+                            ),
+                          ))
                     ],
                   ),
                 ),
