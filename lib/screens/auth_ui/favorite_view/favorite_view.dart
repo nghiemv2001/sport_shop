@@ -12,9 +12,11 @@ class favorite_view extends StatelessWidget {
     AppProvider approvider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "CART",
-          style: TextStyle(color: Colors.black),
+        title: Center(
+          child: const Text(
+            "Favourite",
+            style: TextStyle(color: Colors.black),
+          ),
         ),
       ),
       body: approvider.getfavoriteProductList.isEmpty

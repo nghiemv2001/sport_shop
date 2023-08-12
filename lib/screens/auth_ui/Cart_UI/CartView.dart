@@ -17,9 +17,11 @@ class _Cart_ViewState extends State<Cart_View> {
     AppProvider approvider = Provider.of<AppProvider>(context);
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "CART",
-            style: TextStyle(color: Colors.black),
+          title: Center(
+            child: const Text(
+              "CART",
+              style: TextStyle(color: Colors.black),
+            ),
           ),
         ),
         body: approvider.getCartProductList.isEmpty

@@ -3,7 +3,6 @@ import 'package:demo_sogin_signup_firebase/constants/routes.dart';
 import 'package:demo_sogin_signup_firebase/models/product_model.dart';
 import 'package:demo_sogin_signup_firebase/provider/provider_model.dart';
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/Cart_UI/CartView.dart';
-import 'package:demo_sogin_signup_firebase/screens/auth_ui/favorite_view/favorite_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -73,7 +72,7 @@ class _ProductDetailState extends State<ProductDetail> {
             child: Text(widget.singleProduct.description),
           ),
           SizedBox(
-            height: 20,
+            height: 10,
           ),
           Row(
             children: [
@@ -130,8 +129,8 @@ class _ProductDetailState extends State<ProductDetail> {
                 width: 140,
                 child: ElevatedButton(
                   onPressed: () {
-                    Routes.instance
-                        .push(widget: const favorite_view(), context: context);
+                    // Routes.instance
+                    //     .push(widget: const favorite_view(), context: context);
                   },
                   child: Text("BUY"),
                 ),
@@ -139,7 +138,7 @@ class _ProductDetailState extends State<ProductDetail> {
             ],
           ),
           SizedBox(
-            height: 20,
+            height: 60,
           )
         ],
       ),
