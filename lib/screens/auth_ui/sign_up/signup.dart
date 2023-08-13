@@ -1,10 +1,11 @@
+import 'package:demo_sogin_signup_firebase/constants/routes.dart';
+import 'package:demo_sogin_signup_firebase/firebase/firebase_helper/firebase_auth_helper.dart';
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/sign_in/login.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/assets_image.dart';
-import '../../../constants/asstes_colors.dart';
+import '../../../constants/constans.dart';
 import '../../../reusable_widget/reusable_widget.dart';
 
 class Signup extends StatefulWidget {
@@ -32,9 +33,9 @@ class _SignupState extends State<Signup> {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
-          App_colors.primaryColor,
-          App_colors.textColor,
-          App_colors.textColor,
+          Colors.black45,
+          Colors.blueGrey,
+          Colors.blueGrey,
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: SingleChildScrollView(
           child: Padding(
@@ -142,18 +143,26 @@ class _SignupState extends State<Signup> {
                 SizedBox(
                   height: 10,
                 ),
-                Button_Login(context, "SIGNUP", () {
-                  FirebaseAuth.instance
-                      .createUserWithEmailAndPassword(
-                          email: _emailController.text,
-                          password: _passwordController.text)
-                      .then((value) {
-                    print("Create Account");
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
-                  }).onError((error, stackTrace) {
-                    print("${error.toString()}");
-                  });
+                Button_Login(context, "SIGNUP", () async {
+                  bool Vaildation = signupVaildation(
+                      _usernameController.text,
+                      _emailController.text,
+                      _phoneController.text,
+                      _passwordController.text,
+                      _confirmpasswordController.text);
+
+                  if (Vaildation) {
+                    bool isSignup = await FirebaseAuthHelper.instance.sigup(
+                        _usernameController.text,
+                        _emailController.text,
+                        _phoneController.text,
+                        _passwordController.text,
+                        context);
+                    if (isSignup) {
+                      Routes.instance.pushAndRemoveUntil(
+                          widget: Login(), context: context);
+                    }
+                  }
                 }),
                 SizedBox(
                   height: 10,

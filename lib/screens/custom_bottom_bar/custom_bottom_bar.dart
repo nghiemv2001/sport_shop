@@ -1,9 +1,10 @@
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/Cart_UI/CartView.dart';
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/account/account_view.dart';
-import 'package:demo_sogin_signup_firebase/screens/auth_ui/favorite_view/favorite_view.dart';
 import 'package:demo_sogin_signup_firebase/screens/home_ui/home.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+
+import '../order_screen/order_screen.dart';
 
 class CustomBottomBar extends StatefulWidget {
   CustomBottomBar({final Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _CustomBottomBarStylesExampleState extends State<CustomBottomBar> {
   bool _hideNavBar = false;
 
   List<Widget> _buildScreens() =>
-      [Home(), Cart_View(), favorite_view(), account_view()];
+      [Home(), Cart_View(), order_view(), account_view()];
 
   List<PersistentBottomNavBarItem> _navBarsItems() => [
         PersistentBottomNavBarItem(
@@ -36,9 +37,9 @@ class _CustomBottomBarStylesExampleState extends State<CustomBottomBar> {
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.favorite),
-          inactiveIcon: const Icon(Icons.favorite_border),
-          title: "Favourite",
+          icon: const Icon(Icons.circle),
+          inactiveIcon: const Icon(Icons.circle_outlined),
+          title: "Orders",
           activeColorPrimary: Colors.blueAccent,
           inactiveColorPrimary: Colors.grey,
         ),

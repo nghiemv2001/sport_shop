@@ -1,44 +1,54 @@
 // To parse this JSON data, do
 //
-//     final product = productFromJson(jsonString);
+//     final userModel = userModelFromJson(jsonString);
 
 import 'dart:convert';
 
-Product productFromJson(String str) => Product.fromJson(json.decode(str));
+UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
-String productToJson(Product data) => json.encode(data.toJson());
+String userModelToJson(UserModel data) => json.encode(data.toJson());
 
-class Product {
+class UserModel {
   String id;
-  String image;
+  String? image;
   String name;
   String email;
+  String phone;
+  String password;
 
-  Product({
+  UserModel({
     required this.id,
-    required this.image,
+    this.image,
     required this.name,
     required this.email,
+    required this.phone,
+    required this.password,
   });
 
-  Product copyWith({
+  UserModel copyWith({
     String? id,
     String? image,
     String? name,
     String? email,
+    String? phone,
+    String? password,
   }) =>
-      Product(
+      UserModel(
         id: id ?? this.id,
         image: image ?? this.image,
         name: name ?? this.name,
         email: email ?? this.email,
+        phone: phone ?? this.phone,
+        password: password ?? this.password,
       );
 
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json["id"],
         image: json["image"],
         name: json["name"],
         email: json["email"],
+        phone: json["phone"],
+        password: json["password"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -46,5 +56,7 @@ class Product {
         "image": image,
         "name": name,
         "email": email,
+        "phone": phone,
+        "password": password,
       };
 }

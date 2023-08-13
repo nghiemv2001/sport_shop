@@ -82,17 +82,34 @@ String getMessageFromErrorCode(String errorcode) {
   }
 }
 
-bool loginVaildation(String email, password) {
-  if (email.isEmpty && password.isEmpty) {
-    showMessage("EMAIL EMPTY");
-    return false;
-  }
+bool loginVaildation(String email, String password) {
   if (email.isEmpty) {
     showMessage("EMAIL EMPTY");
     return false;
   }
   if (password.isEmpty) {
     showMessage("EMAIL EMPTY");
+    return false;
+  }
+  return true;
+}
+
+bool signupVaildation(String username, String email, String phone,
+    String password, String confim) {
+  if (username.isEmpty) {
+    showMessage("USERNAME EMPTY");
+    return false;
+  }
+  if (email.isEmpty) {
+    showMessage("EMAIL EMPTY");
+    return false;
+  }
+  if (phone.isEmpty) {
+    showMessage("PHONE EMPTY");
+    return false;
+  }
+  if (password.isEmpty) {
+    showMessage("Password EMPTY");
     return false;
   }
   return true;

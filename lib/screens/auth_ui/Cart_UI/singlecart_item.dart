@@ -136,7 +136,9 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                 )
                               ]),
                           Text(
-                            "Price: ${widget.singProduct.price} \$",
+                            "Price: ${widget.singProduct.price}\$",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),

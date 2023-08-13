@@ -1,9 +1,11 @@
 import 'package:demo_sogin_signup_firebase/firebase/firebase_firestore/firebase_firebasestore.dart';
+import 'package:demo_sogin_signup_firebase/provider/provider_model.dart';
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/category_ui/category_viewproducts.dart';
 import 'package:demo_sogin_signup_firebase/screens/product_ui/product_detail.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/routes.dart';
 import '../../models/category_model.dart';
@@ -23,6 +25,8 @@ class _HomeState extends State<Home> {
   bool isLoading = false;
   @override
   void initState() {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    appProvider.getUserInfoFireBase();
     getCategoryList();
     super.initState();
   }
@@ -33,14 +37,12 @@ class _HomeState extends State<Home> {
     setState(() {
       isLoading = true;
     });
-    categorieslist = await FirebaseFirestoreHelper.instance.getCategories();
+    categorieslist = await FirebaseFireStoreHelper.instance.getCategories();
 
     bestproductlist =
-        await FirebaseFirestoreHelper.instance.getBestProductList();
+        await FirebaseFireStoreHelper.instance.getBestProductList();
     bestproductlist.shuffle();
-    setState(() {
-      isLoading = false;
-    });
+    isLoading = false;
   }
 
   Widget build(BuildContext context) {
@@ -188,7 +190,7 @@ class _HomeState extends State<Home> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        "Price: ${singleProduct.price} \$",
+                                        "Price: ${singleProduct.price}\$",
                                         style: const TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold),

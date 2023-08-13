@@ -3,6 +3,7 @@ import 'package:demo_sogin_signup_firebase/constants/routes.dart';
 import 'package:demo_sogin_signup_firebase/models/product_model.dart';
 import 'package:demo_sogin_signup_firebase/provider/provider_model.dart';
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/Cart_UI/CartView.dart';
+import 'package:demo_sogin_signup_firebase/screens/buy_product/buy_product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,7 @@ class _ProductDetailState extends State<ProductDetail> {
               Padding(
                 padding: const EdgeInsets.only(right: 20, left: 20),
                 child: Text(
-                  widget.singleProduct.name,
+                  "",
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -69,7 +70,11 @@ class _ProductDetailState extends State<ProductDetail> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Text(widget.singleProduct.description),
+            child: Text(
+              widget.singleProduct.description,
+              maxLines: 11,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           SizedBox(
             height: 10,
@@ -129,8 +134,8 @@ class _ProductDetailState extends State<ProductDetail> {
                 width: 140,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Routes.instance
-                    //     .push(widget: const favorite_view(), context: context);
+                    Routes.instance
+                        .push(widget: const checkout(), context: context);
                   },
                   child: Text("BUY"),
                 ),

@@ -14,7 +14,7 @@ class Product {
   String image;
   bool isFavourite;
   String name;
-  String price;
+  double price;
   String status;
   int? qty;
 
@@ -35,7 +35,7 @@ class Product {
     String? image,
     bool? isFavourite,
     String? name,
-    String? price,
+    double? price,
     String? status,
     int? qty,
   }) =>
@@ -56,7 +56,7 @@ class Product {
         image: json["image"],
         isFavourite: json["isFavourite"],
         name: json["name"],
-        price: json["price"],
+        price: double.parse(json["price"].toString()),
         status: json["status"],
         qty: json["qty"],
       );

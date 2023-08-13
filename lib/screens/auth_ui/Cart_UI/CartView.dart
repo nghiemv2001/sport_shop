@@ -16,6 +16,44 @@ class _Cart_ViewState extends State<Cart_View> {
   Widget build(BuildContext context) {
     AppProvider approvider = Provider.of<AppProvider>(context);
     return Scaffold(
+        bottomNavigationBar: SizedBox(
+          height: 200,
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: Column(
+              children: [
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Total",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  width: 350,
+                  height: 60,
+                  child: ElevatedButton(
+                    child: Text(
+                      "Checkout",
+                    ),
+                    onPressed: () {},
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
         appBar: AppBar(
           title: Center(
             child: const Text(

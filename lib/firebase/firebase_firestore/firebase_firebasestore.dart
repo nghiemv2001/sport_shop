@@ -2,10 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo_sogin_signup_firebase/constants/constans.dart';
 import 'package:demo_sogin_signup_firebase/models/category_model.dart';
 import 'package:demo_sogin_signup_firebase/models/product_model.dart';
+import 'package:demo_sogin_signup_firebase/models/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class FirebaseFirestoreHelper {
-  static FirebaseFirestoreHelper instance = FirebaseFirestoreHelper();
+class FirebaseFireStoreHelper {
+  static FirebaseFireStoreHelper instance = FirebaseFireStoreHelper();
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+
   Future<List<Category>> getCategories() async {
     try {
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
@@ -40,16 +43,21 @@ class FirebaseFirestoreHelper {
     try {
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
           await _firebaseFirestore.collectionGroup("products").get();
-      for (var element in querySnapshot.docs) {
-        print(element.data());
-      }
       List<Product> bestProductList =
           querySnapshot.docs.map((e) => Product.fromJson(e.data())).toList();
       return bestProductList;
     } catch (e) {
-      print(e.toString());
       showMessage(e.toString());
       return [];
     }
+  }
+
+  Future<UserModel> getUserInForm() async {
+    DocumentSnapshot<Map<String, dynamic>> querySnapShot =
+        await _firebaseFirestore
+            .collection("users")
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .get();
+    return UserModel.fromJson(querySnapShot.data()!);
   }
 }
