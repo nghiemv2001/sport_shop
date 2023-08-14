@@ -114,7 +114,7 @@ class _CategoryViewState extends State<CategoryView> {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Text(
-                                          "Price: ${singleProduct.price} \$",
+                                          "${singleProduct.price} \$",
                                           style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold),

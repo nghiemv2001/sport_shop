@@ -85,9 +85,11 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                         ),
                                         onPressed: () {
                                           setState(() {
-                                            if (qty >= 1) {
+                                            if (qty > 1) {
                                               qty--;
                                             }
+                                            approvider.updateQty(
+                                                widget.singProduct, qty);
                                           });
                                         }),
                                     Text(qty.toString()),
@@ -104,6 +106,8 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                           setState(() {
                                             qty++;
                                           });
+                                          approvider.updateQty(
+                                              widget.singProduct, qty);
                                         }),
                                   ],
                                 ),
@@ -136,7 +140,7 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                 )
                               ]),
                           Text(
-                            "Price: ${widget.singProduct.price}\$",
+                            "${widget.singProduct.price}\$",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(

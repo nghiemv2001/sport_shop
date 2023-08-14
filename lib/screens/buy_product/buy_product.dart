@@ -1,7 +1,15 @@
+import 'package:demo_sogin_signup_firebase/firebase/firebase_firestore/firebase_firebasestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../constants/routes.dart';
+import '../../models/product_model.dart';
+import '../../provider/provider_model.dart';
+import '../custom_bottom_bar/custom_bottom_bar.dart';
 
 class checkout extends StatefulWidget {
-  const checkout({Key? key}) : super(key: key);
+  final Product singleProduct;
+  const checkout({Key? key, required this.singleProduct}) : super(key: key);
 
   @override
   State<checkout> createState() => _checkoutState();
@@ -11,43 +19,44 @@ class _checkoutState extends State<checkout> {
   int groupvalue = 1;
   @override
   Widget build(BuildContext context) {
+    AppProvider approvider = Provider.of<AppProvider>(context, listen: false);
     return Scaffold(
-      bottomNavigationBar: SizedBox(
-        height: 200,
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            children: [
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Total",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "\$150",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                width: 350,
-                height: 60,
-                child: ElevatedButton(
-                  child: Text(
-                    "Checkout",
-                  ),
-                  onPressed: () {},
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+      // bottomNavigationBar: SizedBox(
+      //   height: 200,
+      //   child: Padding(
+      //     padding: const EdgeInsets.all(8),
+      //     child: Column(
+      //       children: [
+      //         const Row(
+      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //           children: [
+      //             Text(
+      //               "Total",
+      //               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      //             ),
+      //             Text(
+      //               "\$150",
+      //               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      //             )
+      //           ],
+      //         ),
+      //         SizedBox(
+      //           height: 20,
+      //         ),
+      //         SizedBox(
+      //           width: 350,
+      //           height: 60,
+      //           child: ElevatedButton(
+      //             child: Text(
+      //               "Finish",
+      //             ),
+      //             onPressed: () {},
+      //           ),
+      //         )
+      //       ],
+      //     ),
+      //   ),
+      // ),
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
@@ -117,8 +126,35 @@ class _checkoutState extends State<checkout> {
                   const Text(
                     "Credit Card",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  )
+                  ),
                 ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              width: 350,
+              height: 45,
+              child: ElevatedButton(
+                child: Text(
+                  "Continues",
+                ),
+                onPressed: () async {
+                  approvider.getBuyProductList.clear();
+                  approvider.addBuyProduct(widget.singleProduct);
+                  bool value = await FirebaseFireStoreHelper.instance
+                      .upLoadOrderProductFirebase(
+                          approvider.getBuyProductList,
+                          context,
+                          groupvalue == 1 ? "Cash an Delivery" : "Paid");
+                  if (value) {
+                    Future.delayed(Duration(seconds: 2), () {
+                      Routes.instance
+                          .push(widget: CustomBottomBar(), context: context);
+                    });
+                  }
+                },
               ),
             )
           ],

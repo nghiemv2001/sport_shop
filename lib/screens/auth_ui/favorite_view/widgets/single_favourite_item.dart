@@ -80,7 +80,9 @@ class SingGle_Favourite_itemState extends State<SingGle_Favourite_item> {
                                 )
                               ]),
                           Text(
-                            "Price: ${widget.singProduct.price} \$",
+                            "${widget.singProduct.price} \$",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),

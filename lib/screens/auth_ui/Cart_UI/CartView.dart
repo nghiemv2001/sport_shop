@@ -22,7 +22,7 @@ class _Cart_ViewState extends State<Cart_View> {
             padding: EdgeInsets.all(8),
             child: Column(
               children: [
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -31,7 +31,7 @@ class _Cart_ViewState extends State<Cart_View> {
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "",
+                      "${approvider.totalPrice().toString()}",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )
@@ -47,7 +47,12 @@ class _Cart_ViewState extends State<Cart_View> {
                     child: Text(
                       "Checkout",
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      // approvider.getBuyProductList.clear();
+                      // approvider.addBuyProduct(widget.s)
+                      // Routes.instance
+                      //     .push(widget: checkout(singleProduct: ,), context: context);
+                    },
                   ),
                 )
               ],

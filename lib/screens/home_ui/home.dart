@@ -1,15 +1,15 @@
-import 'package:demo_sogin_signup_firebase/firebase/firebase_firestore/firebase_firebasestore.dart';
 import 'package:demo_sogin_signup_firebase/provider/provider_model.dart';
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/category_ui/category_viewproducts.dart';
-import 'package:demo_sogin_signup_firebase/screens/product_ui/product_detail.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/routes.dart';
+import '../../firebase/firebase_firestore/firebase_firebasestore.dart';
 import '../../models/category_model.dart';
 import '../../models/product_model.dart';
+import '../product_ui/product_detail.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -38,11 +38,12 @@ class _HomeState extends State<Home> {
       isLoading = true;
     });
     categorieslist = await FirebaseFireStoreHelper.instance.getCategories();
-
     bestproductlist =
         await FirebaseFireStoreHelper.instance.getBestProductList();
     bestproductlist.shuffle();
-    isLoading = false;
+    setState(() {
+      isLoading = false;
+    });
   }
 
   Widget build(BuildContext context) {
@@ -190,7 +191,7 @@ class _HomeState extends State<Home> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        "Price: ${singleProduct.price}\$",
+                                        "${singleProduct.price}\$",
                                         style: const TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold),
