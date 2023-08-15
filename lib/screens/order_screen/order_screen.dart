@@ -75,7 +75,7 @@ class order_view extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 12,
+                                    height: 5,
                                   ),
                                   order.products.length > 1
                                       ? SizedBox.fromSize()
@@ -93,7 +93,7 @@ class order_view extends StatelessWidget {
                                           ],
                                         ),
                                   SizedBox(
-                                    height: 12,
+                                    height: 5,
                                   ),
                                   Text(
                                     "${order.totalPrice.toString()}\$",
@@ -104,7 +104,7 @@ class order_view extends StatelessWidget {
                                         fontWeight: FontWeight.normal),
                                   ),
                                   SizedBox(
-                                    height: 12,
+                                    height: 5,
                                   ),
                                   Text(
                                     "${order.status}",
@@ -120,7 +120,103 @@ class order_view extends StatelessWidget {
                       )
                     ],
                   ),
-                  children: order.products.length > 1 ? [Text("Hello")] : [],
+                  children: order.products.length > 1
+                      ? [
+                          const Text(
+                            "Details",
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.w600),
+                          ),
+                          const Divider(
+                            color: Colors.black,
+                          ),
+                          ...order.products.map((singleProducts) {
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 16),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: 80,
+                                        width: 80,
+                                        color: Colors.red.withOpacity(0.5),
+                                        child:
+                                            Image.network(singleProducts.image),
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Container(
+                                          height: 95,
+                                          color: Colors.white.withOpacity(0.5),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  width: 100,
+                                                  child: Text(
+                                                    singleProducts.name,
+                                                    style: const TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Column(
+                                                  children: [
+                                                    Text(
+                                                      "${singleProducts.qty.toString()}\$",
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: const TextStyle(
+                                                          fontSize: 18,
+                                                          fontWeight: FontWeight
+                                                              .normal),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  "${singleProducts.price.toString()}\$",
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: const TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.normal),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                  )
+                                ],
+                              ),
+                            );
+                          }).toList()
+                        ]
+                      : [],
                 ),
               );
             },

@@ -1,8 +1,11 @@
+import 'package:demo_sogin_signup_firebase/constants/constans.dart';
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/Cart_UI/singlecart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constants/routes.dart';
 import '../../../provider/provider_model.dart';
+import '../../cart_item_checkout/cart_item_checkout.dart';
 
 class Cart_View extends StatefulWidget {
   const Cart_View({Key? key}) : super(key: key);
@@ -48,10 +51,15 @@ class _Cart_ViewState extends State<Cart_View> {
                       "Checkout",
                     ),
                     onPressed: () {
-                      // approvider.getBuyProductList.clear();
-                      // approvider.addBuyProduct(widget.s)
-                      // Routes.instance
-                      //     .push(widget: checkout(singleProduct: ,), context: context);
+                      approvider.clearBuyProduct();
+                      approvider.addBuyProductCartList();
+                      approvider.clearCart();
+                      if (approvider.getBuyProductList.isEmpty) {
+                        showMessage("Cart is empty");
+                      } else {
+                        Routes.instance
+                            .push(widget: cartItemCheckOut(), context: context);
+                      }
                     },
                   ),
                 )

@@ -44,6 +44,8 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   image_picker: ^1.0.2
   firebase_storage: ^11.2.5
+  firebase_messaging: ^14.6.5
+  flutter_stripe: ^9.3.0
 
 dev_dependencies:
   flutter_test:

@@ -3,19 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/routes.dart';
-import '../../models/product_model.dart';
 import '../../provider/provider_model.dart';
 import '../custom_bottom_bar/custom_bottom_bar.dart';
 
-class checkout extends StatefulWidget {
-  final Product singleProduct;
-  const checkout({Key? key, required this.singleProduct}) : super(key: key);
+class cartItemCheckOut extends StatefulWidget {
+  const cartItemCheckOut({Key? key}) : super(key: key);
 
   @override
-  State<checkout> createState() => _checkoutState();
+  State<cartItemCheckOut> createState() => _cartItemCheckOutState();
 }
 
-class _checkoutState extends State<checkout> {
+class _cartItemCheckOutState extends State<cartItemCheckOut> {
   int groupvalue = 1;
   @override
   Widget build(BuildContext context) {
@@ -105,14 +103,11 @@ class _checkoutState extends State<checkout> {
                   "Continues",
                 ),
                 onPressed: () async {
-                  approvider.clearBuyProduct();
-                  approvider.addBuyProduct(widget.singleProduct);
                   bool value = await FirebaseFireStoreHelper.instance
                       .upLoadOrderProductFirebase(
                           approvider.getBuyProductList,
                           context,
                           groupvalue == 1 ? "Cash an Delivery" : "Paid");
-                  approvider.clearBuyProduct();
                   if (value) {
                     Future.delayed(Duration(seconds: 2), () {
                       Routes.instance
@@ -123,44 +118,6 @@ class _checkoutState extends State<checkout> {
               ),
             )
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class CustomRadio extends StatefulWidget {
-  final int value;
-  final int groupValue;
-  final void Function(int) onChanged;
-  const CustomRadio(
-      {Key? key,
-      required this.value,
-      required this.groupValue,
-      required this.onChanged})
-      : super(key: key);
-
-  @override
-  _CustomRadioState createState() => _CustomRadioState();
-}
-
-class _CustomRadioState extends State<CustomRadio> {
-  @override
-  Widget build(BuildContext context) {
-    bool selected = (widget.value == widget.groupValue);
-
-    return InkWell(
-      onTap: () => widget.onChanged(widget.value),
-      child: Container(
-        margin: const EdgeInsets.all(4),
-        padding: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: selected ? Colors.white : Colors.grey[200]),
-        child: Icon(
-          Icons.circle,
-          size: 30,
-          color: selected ? Colors.deepPurple : Colors.grey[200],
         ),
       ),
     );

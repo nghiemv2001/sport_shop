@@ -5,6 +5,7 @@ import 'package:demo_sogin_signup_firebase/models/order_model.dart';
 import 'package:demo_sogin_signup_firebase/models/product_model.dart';
 import 'package:demo_sogin_signup_firebase/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 
 class FirebaseFireStoreHelper {
@@ -84,12 +85,14 @@ class FirebaseFireStoreHelper {
         "status": "Pending",
         "totalPrice": totalPrice,
         "payment": payment,
+        "orderId": admin.id
       });
       documentReference.set({
         "products": list.map((e) => e.toJson()),
         "status": "Pending",
         "totalPrice": totalPrice,
         "payment": payment,
+        "orderId": documentReference.id
       });
       Navigator.of(context, rootNavigator: true).pop();
       showMessage("Ordered Successfully");
@@ -117,6 +120,18 @@ class FirebaseFireStoreHelper {
     } catch (e) {
       showMessage(e.toString());
       return [];
+    }
+  }
+
+  Future<void> updateTokeFromFirebase() async {
+    String? token = await FirebaseMessaging.instance.getToken();
+    if (token != null) {
+      await _firebaseFirestore
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        "notificationToken": token,
+      });
     }
   }
 }
