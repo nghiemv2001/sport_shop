@@ -46,7 +46,9 @@ dependencies:
   firebase_storage: ^11.2.5
   firebase_messaging: ^14.6.5
   flutter_stripe: ^9.3.0
-
+  flutter_paypal_checkout: ^1.0.1
+  flutter_inappwebview: ^5.7.2+3
+  url_launcher: ^6.1.11
 dev_dependencies:
   flutter_test:
     sdk: flutter
