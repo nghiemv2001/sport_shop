@@ -1,6 +1,7 @@
 import 'package:demo_sogin_signup_firebase/models/category_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../../constants/routes.dart';
 import '../../../firebase/firebase_firestore/firebase_firebasestore.dart';
@@ -45,16 +46,20 @@ class _CategoryViewState extends State<CategoryView> {
         body: isLoading
             ? Center(
                 child: Container(
-                    height: 100,
-                    width: 100,
-                    alignment: Alignment.center,
-                    child: CircularProgressIndicator()),
+                  height: 100,
+                  width: 100,
+                  alignment: Alignment.center,
+                  child: const SpinKitThreeInOut(
+                    size: 30,
+                    color: Colors.blueGrey,
+                  ),
+                ),
               )
             : SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: kToolbarHeight * 1,
                     ),
                     Padding(
@@ -72,8 +77,15 @@ class _CategoryViewState extends State<CategoryView> {
                     ),
                     bestproductlist.isEmpty
                         ? const Center(
-                            child: Text("Categories dont have any product."),
-                          )
+                            child: Column(
+                            children: [
+                              SpinKitThreeInOut(
+                                size: 30,
+                                color: Colors.blueGrey,
+                              ),
+                              Text("Categories haven't any product!"),
+                            ],
+                          ))
                         : Padding(
                             padding: const EdgeInsets.only(
                                 top: 20, left: 10, right: 10, bottom: 10),
@@ -119,7 +131,7 @@ class _CategoryViewState extends State<CategoryView> {
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
                                         SizedBox(

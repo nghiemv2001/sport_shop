@@ -2,7 +2,7 @@ import 'package:demo_sogin_signup_firebase/constants/theme.dart';
 import 'package:demo_sogin_signup_firebase/firebase/firebase_helper/firebase_auth_helper.dart';
 import 'package:demo_sogin_signup_firebase/firebase_options.dart';
 import 'package:demo_sogin_signup_firebase/provider/provider_model.dart';
-import 'package:demo_sogin_signup_firebase/screens/payment_paypal/home_paypal.dart';
+import 'package:demo_sogin_signup_firebase/screens/auth_ui/sign_in/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           home: StreamBuilder(
             stream: FirebaseAuthHelper.instance.getAuthChange,
             builder: (context, snapshot) {
-              return Home_paypal();
+              return Login();
               // if (snapshot.hasData) {
               //   return Login();
               // } else {

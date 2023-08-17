@@ -37,7 +37,7 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
             Expanded(
               child: Container(
                 height: 140,
-                color: Colors.red.withOpacity(0.5),
+                color: Colors.white.withOpacity(0.5),
                 child: Image.network(widget.singProduct.image),
               ),
             ),
@@ -77,37 +77,55 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                     CupertinoButton(
                                         padding: EdgeInsets.zero,
                                         child: Container(
-                                          height: 40,
-                                          width: 40,
-                                          decoration: const BoxDecoration(
-                                              shape: BoxShape.circle),
-                                          child: Icon(Icons.remove),
+                                          width: 37,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: Colors.black,
+                                              width: 2.0,
+                                            ),
+                                          ),
+                                          child: const CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            foregroundColor: Colors.black,
+                                            child: Icon(Icons.remove),
+                                          ),
                                         ),
                                         onPressed: () {
                                           setState(() {
-                                            if (qty > 1) {
+                                            if (qty >= 1) {
                                               qty--;
                                             }
-                                            approvider.updateQty(
-                                                widget.singProduct, qty);
                                           });
                                         }),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
                                     Text(qty.toString()),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
                                     CupertinoButton(
                                         padding: EdgeInsets.zero,
                                         child: Container(
-                                          height: 40,
-                                          width: 40,
-                                          decoration: const BoxDecoration(
-                                              shape: BoxShape.circle),
-                                          child: Icon(Icons.add),
+                                          width: 37,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: Colors.black,
+                                              width: 2.0,
+                                            ),
+                                          ),
+                                          child: const CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            foregroundColor: Colors.black,
+                                            child: Icon(Icons.add),
+                                          ),
                                         ),
                                         onPressed: () {
                                           setState(() {
                                             qty++;
                                           });
-                                          approvider.updateQty(
-                                              widget.singProduct, qty);
                                         }),
                                   ],
                                 ),
@@ -120,7 +138,7 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                               .contains(widget.singProduct)) {
                                             approvider.addfavoriteProduct(
                                                 widget.singProduct);
-                                            showMessage("Add to wishlist");
+                                            showMessage("Add to favouritelist");
                                           } else {
                                             approvider.removefavoriteProduct(
                                                 widget.singProduct);
@@ -131,9 +149,10 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                           approvider.getfavoriteProductList
                                                   .contains(widget.singProduct)
                                               ? "Remove to wishlist"
-                                              : "Add to WishList",
+                                              : "Add to favouritelist",
                                           style: const TextStyle(
                                               fontSize: 12,
+                                              color: Colors.lightBlue,
                                               fontWeight: FontWeight.bold),
                                         )),
                                   ],
@@ -158,9 +177,11 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                             showMessage("Remove from cart");
                           },
                           child: const CircleAvatar(
+                            backgroundColor: Colors.white,
                             maxRadius: 13,
                             child: Icon(
                               Icons.delete,
+                              color: Colors.black,
                               size: 17,
                             ),
                           ))

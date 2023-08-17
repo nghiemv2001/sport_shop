@@ -23,6 +23,14 @@ class _checkoutState extends State<checkout> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            color: Colors.black,
+            size: 40,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: Text(
           "Checkout",
           style: TextStyle(color: Colors.black),

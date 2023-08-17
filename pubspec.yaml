@@ -49,6 +49,7 @@ dependencies:
   flutter_paypal_checkout: ^1.0.1
   flutter_inappwebview: ^5.7.2+3
   url_launcher: ^6.1.11
+  flutter_spinkit: ^5.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

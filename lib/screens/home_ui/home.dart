@@ -31,6 +31,23 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
+  Future<void> _runFilter(String enterkeyword) async {
+    List<Product> results = [];
+    bestproductlist =
+        await FirebaseFireStoreHelper.instance.getBestProductList();
+    if (enterkeyword.isEmpty) {
+      results = bestproductlist;
+    } else {
+      results = bestproductlist
+          .where((product) =>
+              product.name.toLowerCase().contains(enterkeyword.toLowerCase()))
+          .toList();
+    }
+    setState(() {
+      bestproductlist = results;
+    });
+  }
+
   Future<void> getCategoryList() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(); //
@@ -66,29 +83,33 @@ class _HomeState extends State<Home> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        Text(
+                        const Text(
                           "Sport Shop",
                           style: TextStyle(
                               fontSize: 22, fontWeight: FontWeight.w500),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        TextFormField(
+                        TextField(
+                          onChanged: (value) => _runFilter(value),
                           decoration: InputDecoration(
-                            suffixIcon: Icon(Icons.search),
-                            labelStyle: TextStyle(color: Colors.black45),
+                            suffixIcon: const Icon(
+                              Icons.search,
+                              color: Colors.black,
+                              size: 25,
+                            ),
+                            labelStyle: const TextStyle(color: Colors.black45),
                             filled: true,
                             labelText: "Search ...",
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
                             fillColor: Colors.white.withOpacity(0),
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                                borderSide: const BorderSide(
-                                    width: 2, style: BorderStyle.none)),
+                              borderRadius: BorderRadius.circular(
+                                  20.0), // Đặt giá trị bo tròn tại đây
+                            ),
                           ),
                         )
                       ],
@@ -172,7 +193,8 @@ class _HomeState extends State<Home> {
                                 Product singleProduct = bestproductlist[index];
                                 return Container(
                                   decoration: BoxDecoration(
-                                      color: Colors.yellow.withOpacity(0.3),
+                                      color: Colors.white.withOpacity(0.3),
+                                      border: Border.all(color: Colors.black),
                                       borderRadius: BorderRadius.circular(20)),
                                   child: Column(
                                     children: [
@@ -197,29 +219,47 @@ class _HomeState extends State<Home> {
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
-                                      SizedBox(
+                                      Container(
                                         height: 40,
                                         width: 140,
-                                        child: OutlinedButton(
-                                            onPressed: () {
-                                              Routes.instance.push(
-                                                  widget: ProductDetail(
-                                                      singleProduct:
-                                                          singleProduct),
-                                                  context: context);
-                                            },
-                                            style: OutlinedButton.styleFrom(
-                                                foregroundColor: Colors.black45,
-                                                side: const BorderSide(
-                                                    color: Colors.red)),
-                                            child: const Text(
-                                              "BUY",
-                                              style:
-                                                  TextStyle(color: Colors.red),
-                                            )),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          color: Colors.white,
+                                          boxShadow: const [
+                                            BoxShadow(
+                                                color: Colors.blue,
+                                                spreadRadius: 3),
+                                          ],
+                                        ),
+                                        child: TextButton(
+                                          onPressed: () {
+                                            Routes.instance.push(
+                                                widget: ProductDetail(
+                                                    singleProduct:
+                                                        singleProduct),
+                                                context: context);
+                                          },
+                                          child: const Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Text(
+                                                "BUY",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Icon(
+                                                Icons.shopping_cart,
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
