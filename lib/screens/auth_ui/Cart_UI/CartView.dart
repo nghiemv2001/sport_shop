@@ -31,19 +31,19 @@ class _Cart_ViewState extends State<Cart_View> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "Total",
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 22, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "${approvider.totalPrice().toString()}",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                            "${approvider.totalPrice().toString()}\$",
+                            style: const TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Container(
@@ -57,7 +57,7 @@ class _Cart_ViewState extends State<Cart_View> {
                           ],
                         ),
                         child: TextButton(
-                          child: Text(
+                          child: const Text(
                             "Checkout",
                             style: TextStyle(
                                 fontSize: 32,
@@ -65,14 +65,18 @@ class _Cart_ViewState extends State<Cart_View> {
                                 color: Colors.white),
                           ),
                           onPressed: () {
-                            approvider.clearBuyProduct();
-                            approvider.addBuyProductCartList();
-                            approvider.clearCart();
+                            //   approvider.clearBuyProduct();
+                            // approvider.addBuyProductCartList();
+                            // approvider.clearCart();
                             if (approvider.getBuyProductList.isEmpty) {
                               showMessage("Cart is empty");
                             } else {
+                              print(approvider.getCartProductList);
                               Routes.instance.push(
-                                  widget: cartItemCheckOut(), context: context);
+                                  widget: cartItemCheckOut(
+                                    product: approvider.getCartProductList,
+                                  ),
+                                  context: context);
                             }
                           },
                         ),
@@ -82,8 +86,8 @@ class _Cart_ViewState extends State<Cart_View> {
           ),
         ),
         appBar: AppBar(
-          title: Center(
-            child: const Text(
+          title: const Center(
+            child: Text(
               "CART",
               style: TextStyle(color: Colors.black),
             ),

@@ -70,63 +70,31 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                   ),
                                 ),
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    const SizedBox(
-                                      width: 20,
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 12),
+                                      child: Text(
+                                        "x${qty.toString()}",
+                                        style: TextStyle(fontSize: 23),
+                                      ),
                                     ),
-                                    CupertinoButton(
-                                        padding: EdgeInsets.zero,
-                                        child: Container(
-                                          width: 37,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              color: Colors.black,
-                                              width: 2.0,
-                                            ),
-                                          ),
-                                          child: const CircleAvatar(
-                                            backgroundColor: Colors.white,
-                                            foregroundColor: Colors.black,
-                                            child: Icon(Icons.remove),
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            if (qty >= 1) {
-                                              qty--;
-                                            }
-                                          });
-                                        }),
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Text(qty.toString()),
-                                    SizedBox(
-                                      width: 10,
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 12.0, left: 80),
+                                      child: Text(
+                                        "${widget.singProduct.price * qty}\$",
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                            fontSize: 23,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                    CupertinoButton(
-                                        padding: EdgeInsets.zero,
-                                        child: Container(
-                                          width: 37,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              color: Colors.black,
-                                              width: 2.0,
-                                            ),
-                                          ),
-                                          child: const CircleAvatar(
-                                            backgroundColor: Colors.white,
-                                            foregroundColor: Colors.black,
-                                            child: Icon(Icons.add),
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            qty++;
-                                          });
-                                        }),
                                   ],
                                 ),
                                 Row(
@@ -158,13 +126,6 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                   ],
                                 )
                               ]),
-                          Text(
-                            "${widget.singProduct.price}\$",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
                         ],
                       ),
                       CupertinoButton(

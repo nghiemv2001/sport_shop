@@ -21,6 +21,13 @@ class ProductDetail extends StatefulWidget {
 class _ProductDetailState extends State<ProductDetail> {
   int qty = 1;
   @override
+  void initState() {
+    qty = widget.singleProduct.qty ?? 1;
+    setState(() {});
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     AppProvider approvider = Provider.of<AppProvider>(context, listen: false);
     return Scaffold(
@@ -207,7 +214,11 @@ class _ProductDetailState extends State<ProductDetail> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      Product product = widget.singleProduct.copyWith(qty: qty);
+                      // approvider.clearBuyProduct();
+                      // approvider.addBuyProductCartList();
+                      // approvider.clearCart();
+                      Product product = widget.singleProduct.copyWith(qty: 1);
+                      approvider.addCartProduct(product);
                       Routes.instance.push(
                           widget: checkout(
                             singleProduct: product,
