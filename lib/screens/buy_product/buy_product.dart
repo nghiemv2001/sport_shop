@@ -22,8 +22,6 @@ class _checkoutState extends State<checkout> {
   @override
   Widget build(BuildContext context) {
     AppProvider approvider = Provider.of<AppProvider>(context, listen: false);
-    approvider.getCartProductList;
-    print(approvider.getCartProductList);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -44,7 +42,7 @@ class _checkoutState extends State<checkout> {
         padding: const EdgeInsets.all(12),
         child: Column(
           children: [
-            approvider.getCartProductList.isEmpty
+            approvider.getBuyProductList.isEmpty
                 ? const Center(
                     child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -60,11 +58,11 @@ class _checkoutState extends State<checkout> {
                 : Expanded(
                     flex: 2,
                     child: ListView.builder(
-                        itemCount: approvider.getCartProductList.length,
+                        itemCount: approvider.getBuyProductList.length,
                         padding: const EdgeInsets.all(12),
                         itemBuilder: (ctx, index) {
                           return SingGle_productbuy_item(
-                            singProduct: approvider.getCartProductList[index],
+                            singProduct: approvider.getBuyProductList[index],
                           );
                         }),
                   ),

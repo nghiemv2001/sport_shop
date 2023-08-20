@@ -1,4 +1,5 @@
 import 'package:demo_sogin_signup_firebase/firebase/firebase_firestore/firebase_firebasestore.dart';
+import 'package:demo_sogin_signup_firebase/screens/home_ui/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
@@ -24,18 +25,28 @@ class _cartItemCheckOutState extends State<cartItemCheckOut> {
     AppProvider approvider = Provider.of<AppProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.home_outlined,
+            color: Colors.black,
+            size: 40,
+          ),
+          onPressed: () {
+            Routes.instance.push(widget: Home(), context: context);
+          },
+        ),
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           "Checkout",
           style: TextStyle(color: Colors.black),
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         child: Column(
           children: [
-            approvider.getCartProductList.isEmpty
-                ? Center(
+            approvider.getBuyProductList.isEmpty
+                ? const Center(
                     child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,11 +61,11 @@ class _cartItemCheckOutState extends State<cartItemCheckOut> {
                 : Expanded(
                     flex: 2,
                     child: ListView.builder(
-                        itemCount: approvider.getCartProductList.length,
+                        itemCount: approvider.getBuyProductList.length,
                         padding: const EdgeInsets.all(12),
                         itemBuilder: (ctx, index) {
                           return SingGle_productbuy_item(
-                            singProduct: approvider.getCartProductList[index],
+                            singProduct: approvider.getBuyProductList[index],
                           );
                         }),
                   ),
@@ -96,11 +107,11 @@ class _cartItemCheckOutState extends State<cartItemCheckOut> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
-                      Expanded(
-                        flex: 1,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
                         child: Container(
                           height: 80,
                           decoration: BoxDecoration(
@@ -133,7 +144,7 @@ class _cartItemCheckOutState extends State<cartItemCheckOut> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Padding(
@@ -147,21 +158,21 @@ class _cartItemCheckOutState extends State<cartItemCheckOut> {
                               fontSize: 22, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "${approvider.totalPrice().toString()}\$",
+                          "${approvider.totalPriceBuyProduct().toString()}\$",
                           style: const TextStyle(
                               fontSize: 22, fontWeight: FontWeight.bold),
                         )
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   SizedBox(
                     width: 350,
                     height: 45,
                     child: ElevatedButton(
-                      child: Text(
+                      child: const Text(
                         "Continues",
                       ),
                       onPressed: () async {
@@ -171,7 +182,7 @@ class _cartItemCheckOutState extends State<cartItemCheckOut> {
                                 context,
                                 groupvalue == 1 ? "Cash an Delivery" : "Paid");
                         if (value) {
-                          Future.delayed(Duration(seconds: 2), () {
+                          Future.delayed(const Duration(seconds: 2), () {
                             Routes.instance.push(
                                 widget: CustomBottomBar(), context: context);
                           });

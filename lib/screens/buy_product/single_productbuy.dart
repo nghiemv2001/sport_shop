@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/product_model.dart';
-import '../../../provider/provider_model.dart';
+import '../../constants/constans.dart';
+import '../../provider/provider_model.dart';
 
 class SingGle_productbuy_item extends StatefulWidget {
   final Product singProduct;
@@ -10,10 +12,10 @@ class SingGle_productbuy_item extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<SingGle_productbuy_item> createState() => SingGle_cart_itemState();
+  State<SingGle_productbuy_item> createState() => SingGle_product_itemState();
 }
 
-class SingGle_cart_itemState extends State<SingGle_productbuy_item> {
+class SingGle_product_itemState extends State<SingGle_productbuy_item> {
   int qty = 0;
   @override
   void initState() {
@@ -24,7 +26,7 @@ class SingGle_cart_itemState extends State<SingGle_productbuy_item> {
 
   @override
   Widget build(BuildContext context) {
-    AppProvider approvider = Provider.of<AppProvider>(context, listen: false);
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
     return Container(
         margin: EdgeInsets.only(bottom: 5),
         height: 100,
@@ -50,6 +52,30 @@ class SingGle_cart_itemState extends State<SingGle_productbuy_item> {
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 34.0),
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          child: Center(
+                              child: CupertinoButton(
+                                  padding: EdgeInsets.zero,
+                                  onPressed: () {
+                                    appProvider.deleteOneBuyProduct(
+                                        widget.singProduct);
+                                    showMessage("Success");
+                                  },
+                                  child: const CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    maxRadius: 13,
+                                    child: Icon(
+                                      Icons.delete,
+                                      color: Colors.black,
+                                      size: 17,
+                                    ),
+                                  ))),
+                        ),
+                      ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

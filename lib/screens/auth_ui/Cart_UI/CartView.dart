@@ -65,13 +65,11 @@ class _Cart_ViewState extends State<Cart_View> {
                                 color: Colors.white),
                           ),
                           onPressed: () {
-                            //   approvider.clearBuyProduct();
-                            // approvider.addBuyProductCartList();
-                            // approvider.clearCart();
+                            approvider.addBuyProductCartList();
+                            approvider.clearCart();
                             if (approvider.getBuyProductList.isEmpty) {
                               showMessage("Cart is empty");
                             } else {
-                              print(approvider.getCartProductList);
                               Routes.instance.push(
                                   widget: cartItemCheckOut(
                                     product: approvider.getCartProductList,

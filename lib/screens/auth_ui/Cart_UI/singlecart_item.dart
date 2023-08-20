@@ -26,7 +26,7 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
 
   @override
   Widget build(BuildContext context) {
-    AppProvider approvider = Provider.of<AppProvider>(context, listen: false);
+    AppProvider appProved = Provider.of<AppProvider>(context, listen: false);
     return Container(
         margin: EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
@@ -102,19 +102,19 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                     CupertinoButton(
                                         padding: EdgeInsets.zero,
                                         onPressed: () {
-                                          if (!approvider.getfavoriteProductList
+                                          if (!appProved.getfavoriteProductList
                                               .contains(widget.singProduct)) {
-                                            approvider.addfavoriteProduct(
+                                            appProved.addfavoriteProduct(
                                                 widget.singProduct);
                                             showMessage("Add to favouritelist");
                                           } else {
-                                            approvider.removefavoriteProduct(
+                                            appProved.removefavoriteProduct(
                                                 widget.singProduct);
                                             showMessage("Removed to wishlist");
                                           }
                                         },
                                         child: Text(
-                                          approvider.getfavoriteProductList
+                                          appProved.getfavoriteProductList
                                                   .contains(widget.singProduct)
                                               ? "Remove to wishlist"
                                               : "Add to favouritelist",
@@ -131,10 +131,7 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                       CupertinoButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            AppProvider approvider = Provider.of<AppProvider>(
-                                context,
-                                listen: false);
-                            approvider.removeCartProduct(widget.singProduct);
+                            appProved.removeCartProduct(widget.singProduct);
                             showMessage("Remove from cart");
                           },
                           child: const CircleAvatar(

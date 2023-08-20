@@ -2,7 +2,7 @@ import 'package:demo_sogin_signup_firebase/constants/constans.dart';
 import 'package:demo_sogin_signup_firebase/constants/routes.dart';
 import 'package:demo_sogin_signup_firebase/models/product_model.dart';
 import 'package:demo_sogin_signup_firebase/provider/provider_model.dart';
-import 'package:demo_sogin_signup_firebase/screens/buy_product/buy_product.dart';
+import 'package:demo_sogin_signup_firebase/screens/cart_item_checkout/cart_item_checkout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -218,11 +218,10 @@ class _ProductDetailState extends State<ProductDetail> {
                       // approvider.addBuyProductCartList();
                       // approvider.clearCart();
                       Product product = widget.singleProduct.copyWith(qty: 1);
-                      approvider.addCartProduct(product);
+                      approvider.addOneBuyProduct(product);
                       Routes.instance.push(
-                          widget: checkout(
-                            singleProduct: product,
-                          ),
+                          widget: cartItemCheckOut(
+                              product: approvider.getCartProductList),
                           context: context);
                     },
                     child: Row(

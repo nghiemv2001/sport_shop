@@ -82,6 +82,14 @@ class AppProvider with ChangeNotifier {
     return totalprice;
   }
 
+  double totalPriceBuyProduct() {
+    double totalprice = 0.0;
+    for (var element in _buyProductlist) {
+      totalprice += element.price * element.qty!;
+    }
+    return totalprice;
+  }
+
   void updateQty(Product product, int qty) {
     int index = _cartProductlist.indexOf(product);
     _cartProductlist[index].qty = qty;
@@ -95,6 +103,16 @@ class AppProvider with ChangeNotifier {
 
   void addBuyProductCartList() {
     _buyProductlist.addAll(_cartProductlist);
+    notifyListeners();
+  }
+
+  void addOneBuyProduct(product) {
+    _buyProductlist.add(product);
+    notifyListeners();
+  }
+
+  void deleteOneBuyProduct(product) {
+    _buyProductlist.remove(product);
     notifyListeners();
   }
 
