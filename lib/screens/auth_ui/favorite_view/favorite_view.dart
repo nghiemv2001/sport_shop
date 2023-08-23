@@ -19,16 +19,16 @@ class favorite_view extends StatelessWidget {
           ),
         ),
       ),
-      body: approvider.getfavoriteProductList.isEmpty
+      body: approvider.getFavoriteProductList.isEmpty
           ? const Center(
               child: Text("Empty"),
             )
           : ListView.builder(
-              itemCount: approvider.getfavoriteProductList.length,
+              itemCount: approvider.getFavoriteProductList.length,
               padding: const EdgeInsets.all(12),
               itemBuilder: (ctx, index) {
                 return SingGle_Favourite_item(
-                  singProduct: approvider.getfavoriteProductList[index],
+                  singProduct: approvider.getFavoriteProductList[index],
                 );
               }),
     );

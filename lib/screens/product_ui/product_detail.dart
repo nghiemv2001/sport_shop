@@ -2,7 +2,7 @@ import 'package:demo_sogin_signup_firebase/constants/constans.dart';
 import 'package:demo_sogin_signup_firebase/constants/routes.dart';
 import 'package:demo_sogin_signup_firebase/models/product_model.dart';
 import 'package:demo_sogin_signup_firebase/provider/provider_model.dart';
-import 'package:demo_sogin_signup_firebase/screens/cart_item_checkout/cart_item_checkout.dart';
+import 'package:demo_sogin_signup_firebase/screens/buy_product/buyProduct.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -84,7 +84,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       }
                     },
                     icon: Icon(
-                      approvider.getfavoriteProductList
+                      approvider.getFavoriteProductList
                               .contains(widget.singleProduct)
                           ? Icons.favorite
                           : Icons.favorite_border,
@@ -214,15 +214,10 @@ class _ProductDetailState extends State<ProductDetail> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // approvider.clearBuyProduct();
-                      // approvider.addBuyProductCartList();
-                      // approvider.clearCart();
                       Product product = widget.singleProduct.copyWith(qty: 1);
                       approvider.addOneBuyProduct(product);
-                      Routes.instance.push(
-                          widget: cartItemCheckOut(
-                              product: approvider.getCartProductList),
-                          context: context);
+                      Routes.instance
+                          .push(widget: buyProduct(), context: context);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

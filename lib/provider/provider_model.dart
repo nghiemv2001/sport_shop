@@ -15,19 +15,83 @@ class AppProvider with ChangeNotifier {
   //cart work
   final List<Product> _cartProductlist = [];
   final List<Product> _buyProductlist = [];
+  final List<Product> _favoriteProductlist = [];
+
+  List<Product> get getCartProductList => _cartProductlist;
+  List<Product> get getBuyProductList => _buyProductlist;
+  List<Product> get getFavoriteProductList => _favoriteProductlist;
+
+  //CartProductList-----------------------------------------------------------
   void addCartProduct(Product product) {
     _cartProductlist.add(product);
     notifyListeners();
   }
 
   void removeCartProduct(Product product) {
+    print("2");
     _cartProductlist.remove(product);
+    print("3");
+    notifyListeners();
+    print("4");
+  }
+
+  void clearCart() {
+    _cartProductlist.clear();
     notifyListeners();
   }
 
-  List<Product> get getCartProductList => _cartProductlist;
-  //isfavorite
-  final List<Product> _favoriteProductlist = [];
+  void updateQty(Product product, int qty) {
+    int index = _cartProductlist.indexOf(product);
+    _cartProductlist[index].qty = qty;
+  }
+
+  //TOTAL PRICE
+  double totalPrice() {
+    double totalprice = 0.0;
+    for (var element in _cartProductlist) {
+      totalprice += element.price * element.qty!;
+    }
+    return totalprice;
+  }
+  //BuyProductList-----------------------------------------------------------
+
+  void addBuyProduct(Product product) {
+    _buyProductlist.add(product);
+    notifyListeners();
+  }
+
+  void addBuyProductCartList() {
+    _buyProductlist.addAll(_cartProductlist);
+    notifyListeners();
+  }
+
+  void addOneBuyProduct(product) {
+    _buyProductlist.add(product);
+    notifyListeners();
+  }
+
+  void removeBuyProduct(Product product) {
+    print("3");
+    _buyProductlist.remove(product);
+    print("4");
+    notifyListeners();
+    print("5");
+  }
+
+  void clearBuyProduct() {
+    _buyProductlist.clear();
+    notifyListeners();
+  }
+
+  double totalPriceBuyProduct() {
+    double totalprice = 0.0;
+    for (var element in _buyProductlist) {
+      totalprice += element.price * element.qty!;
+    }
+    return totalprice;
+  }
+
+  //FavouriteList-----------------------------------------------------------
   void addfavoriteProduct(Product product) {
     _favoriteProductlist.add(product);
     notifyListeners();
@@ -38,14 +102,12 @@ class AppProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  //User-----------------------------------------------------------
   Future<void> getUserInfoFireBase() async {
     _userModel = await FirebaseFireStoreHelper.instance.getUserInForm();
     notifyListeners();
   }
 
-  List<Product> get getfavoriteProductList => _favoriteProductlist;
-
-  ///User Inform
   Future<void> updateUserInfoFirebase(
       BuildContext context, UserModel userModel, File? file) async {
     if (file == null) {
@@ -72,59 +134,4 @@ class AppProvider with ChangeNotifier {
     showMessage("Successfully updated profile");
     notifyListeners();
   }
-
-  //TOTAL PRICE
-  double totalPrice() {
-    double totalprice = 0.0;
-    for (var element in _cartProductlist) {
-      totalprice += element.price * element.qty!;
-    }
-    return totalprice;
-  }
-
-  double totalPriceBuyProduct() {
-    double totalprice = 0.0;
-    for (var element in _buyProductlist) {
-      totalprice += element.price * element.qty!;
-    }
-    return totalprice;
-  }
-
-  void updateQty(Product product, int qty) {
-    int index = _cartProductlist.indexOf(product);
-    _cartProductlist[index].qty = qty;
-  }
-
-  ///buy product
-  void addBuyProduct(Product product) {
-    _buyProductlist.add(product);
-    notifyListeners();
-  }
-
-  void addBuyProductCartList() {
-    _buyProductlist.addAll(_cartProductlist);
-    notifyListeners();
-  }
-
-  void addOneBuyProduct(product) {
-    _buyProductlist.add(product);
-    notifyListeners();
-  }
-
-  void deleteOneBuyProduct(product) {
-    _buyProductlist.remove(product);
-    notifyListeners();
-  }
-
-  void clearCart() {
-    _cartProductlist.clear();
-    notifyListeners();
-  }
-
-  void clearBuyProduct() {
-    _buyProductlist.clear();
-    notifyListeners();
-  }
-
-  List<Product> get getBuyProductList => _buyProductlist;
 }

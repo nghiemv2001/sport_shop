@@ -102,7 +102,7 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                     CupertinoButton(
                                         padding: EdgeInsets.zero,
                                         onPressed: () {
-                                          if (!appProved.getfavoriteProductList
+                                          if (!appProved.getFavoriteProductList
                                               .contains(widget.singProduct)) {
                                             appProved.addfavoriteProduct(
                                                 widget.singProduct);
@@ -114,7 +114,7 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                                           }
                                         },
                                         child: Text(
-                                          appProved.getfavoriteProductList
+                                          appProved.getFavoriteProductList
                                                   .contains(widget.singProduct)
                                               ? "Remove to wishlist"
                                               : "Add to favouritelist",
@@ -131,8 +131,11 @@ class SingGle_cart_itemState extends State<SingGle_cart_item> {
                       CupertinoButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
+                            print("1");
                             appProved.removeCartProduct(widget.singProduct);
+                            print("5");
                             showMessage("Remove from cart");
+                            print("6");
                           },
                           child: const CircleAvatar(
                             backgroundColor: Colors.white,

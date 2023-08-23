@@ -1,12 +1,12 @@
 import 'package:demo_sogin_signup_firebase/constants/constans.dart';
 import 'package:demo_sogin_signup_firebase/screens/auth_ui/Cart_UI/singlecart_item.dart';
+import 'package:demo_sogin_signup_firebase/screens/buy_product/buyProduct.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/routes.dart';
 import '../../../provider/provider_model.dart';
-import '../../cart_item_checkout/cart_item_checkout.dart';
 
 class Cart_View extends StatefulWidget {
   const Cart_View({Key? key}) : super(key: key);
@@ -71,10 +71,9 @@ class _Cart_ViewState extends State<Cart_View> {
                               showMessage("Cart is empty");
                             } else {
                               Routes.instance.push(
-                                  widget: cartItemCheckOut(
-                                    product: approvider.getCartProductList,
-                                  ),
-                                  context: context);
+                                widget: const buyProduct(),
+                                context: context,
+                              );
                             }
                           },
                         ),
@@ -108,6 +107,7 @@ class _Cart_ViewState extends State<Cart_View> {
                 itemCount: approvider.getCartProductList.length,
                 padding: const EdgeInsets.all(12),
                 itemBuilder: (ctx, index) {
+                  print("đã goi");
                   return SingGle_cart_item(
                     singProduct: approvider.getCartProductList[index],
                   );
